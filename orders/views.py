@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 from orders.models import ClinicManager, Order
+from django.views.generic.list import ListView
 
 def hello(request):
     return HttpResponse('Hello, user!')
@@ -33,3 +34,7 @@ class ManagerViewOrders(TemplateView):
         context['order_list'] = Order.objects.filter(manager__pk = manager_id)
         context['manager'] = ClinicManager.objects.get(pk = manager_id)
         return context
+
+class ManagersViewAll(ListView):
+    template_name = "manager_list.html"
+    model = ClinicManager
