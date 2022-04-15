@@ -7,6 +7,6 @@ urlpatterns = [
     path('managerOrders/<int:manager_id>', views.ManagerViewOrders.as_view(), name='manager-orders'),
     path('managers', views.ManagersViewAll.as_view(), name='managers'),
     path('api/products/total', total_products),
-    path('api/products/', all_products),
+    path('api/products/', all_products.as_view(), name='all_products'),
 
 ]
