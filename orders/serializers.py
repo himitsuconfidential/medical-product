@@ -1,6 +1,6 @@
 from rest_framework import serializers
-
-class MedicalProductSerializer(serializers.Serializer):
-    #id = serializers.IntegerField(read_only=True)
-    name = serializers.CharField(max_length=200)
-    description = serializers.CharField()
+from .models import MedicalProduct
+class MedicalProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MedicalProduct
+        fields = ['name', 'description']
