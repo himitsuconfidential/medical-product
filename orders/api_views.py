@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from .models import MedicalProduct
 from .serializers import MedicalProductSerializer
 from rest_framework import generics
+from rest_framework import viewsets
 
 @api_view(['GET',])
 def total_products(request):
@@ -11,5 +12,9 @@ def total_products(request):
 
 
 class all_products(generics.ListAPIView):
+    queryset = MedicalProduct.objects.all()
+    serializer_class = MedicalProductSerializer
+
+class ProductViewSet(viewsets.ModelViewSet):
     queryset = MedicalProduct.objects.all()
     serializer_class = MedicalProductSerializer
