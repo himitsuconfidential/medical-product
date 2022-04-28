@@ -6,6 +6,7 @@ from rest_framework import generics
 from rest_framework import viewsets
 from orders.models import Order
 import datetime
+import json
 @api_view(['GET',])
 def total_products(request):
     count = MedicalProduct.objects.count()
@@ -26,7 +27,10 @@ def OrdersView(request, **kwargs):
     #products_name= kwargs['products_name']
 
     #orders = Order.objects.filter(manager__name = manager_name, products__name = products_name)
-    kwargs['time'] = datetime.datetime.fromisoformat(kwargs['time'])
+    kwargs = json.loads(kwargs['json_dict'])
+        
+    if 'time' in kwargs:
+        kwargs['time'] = datetime.datetime.fromisoformat(kwargs['time'])
     orders = Order.objects.filter(**kwargs)
     serializer = OrderSerializer(orders, many =True)
     return Response(serializer.data)
